@@ -1,7 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ToasterProvider from "@/components/ToasterProvider";
+import ToasterProvider from "@/components/ToastProvider";
 
 export const metadata = {
   title: "BookVerse – Your Digital Library",
