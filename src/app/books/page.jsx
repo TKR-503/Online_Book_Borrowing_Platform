@@ -43,7 +43,7 @@ function BooksContent() {
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search books by title..."
             className="inp"
-            style={{ paddingRight: 52, fontSize: 14, height: 48, borderRadius: 10, border: "1.5px solid #e2e8f0", background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+            style={{ width: "100%", paddingLeft: 16, paddingRight: 52, fontSize: 14, color: "#1e293b", height: 48, borderRadius: 10, border: "1.5px solid #e2e8f0", background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", outline: "none" }}
           />
           <button type="button" onClick={() => setSearch(search)} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 34, height: 34, borderRadius: 8, background: "#4f46e5", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="16" height="16" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24">

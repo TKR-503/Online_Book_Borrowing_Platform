@@ -25,10 +25,11 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO BANNER ── */}
-      <section className="hero-gradient" style={{ position: "relative", overflow: "hidden", padding: "20px 0" }}>
+      <section className="hero-gradient" style={{ position: "relative", overflow: "hidden", minHeight: 460, display: "flex", alignItems: "center", padding: "16px 0" }}>
         <div className="hero-glow-1" />
         <div className="hero-glow-2" />
-        <div id="hero-grid" style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 24px 56px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center", position: "relative", zIndex: 2 }}>
+        <div className="hero-glow-3" />
+        <div id="hero-grid" style={{ maxWidth: 1200, width: "100%", margin: "0 auto", padding: "48px 24px 44px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center", position: "relative", zIndex: 2 }}>
           <div>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", background: "rgba(255,255,255,0.12)", borderRadius: 20, fontSize: 13, fontWeight: 700, color: "#a5b4fc", marginBottom: 18, border: "1px solid rgba(255,255,255,0.15)" }}>
               <span>📚</span> Digital Library Platform
@@ -39,22 +40,17 @@ export default function HomePage() {
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.85)", lineHeight: 1.7, marginBottom: 32, maxWidth: 420 }}>
               Discover thousands of books across Science, Story, and Technology. Borrow instantly and start reading today.
             </p>
-            <Link href="/books" style={{
-              display: "inline-flex", alignItems: "center", gap: 10,
-              padding: "14px 32px", background: "#fff", color: "#4f46e5",
-              borderRadius: 10, fontWeight: 800, fontSize: 16, textDecoration: "none",
-              boxShadow: "0 6px 25px rgba(0,0,0,0.30)",
-              transition: "transform 0.15s ease, box-shadow 0.15s ease"
-            }}>
+            <Link href="/books" className="btn-browse-now">
               Browse Now
-              <svg width="16" height="16" fill="none" stroke="#4f46e5" strokeWidth="2.5" viewBox="0 0 24 24">
+              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </Link>
           </div>
 
-          {/* Right: styled image with shadow & background */}
+          {/* Right: styled image with glowing backdrop shadow */}
           <div className="hero-img-container">
+            <div className="hero-img-backdrop-shadow" />
             <div className="hero-img-card">
               <Image
                 src="/Book_photo.png"

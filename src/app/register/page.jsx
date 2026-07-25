@@ -8,6 +8,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +47,7 @@ export default function RegisterPage() {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="John Doe"
-              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none" }}
+              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
 
@@ -58,7 +59,18 @@ export default function RegisterPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="you@example.com"
-              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none" }}
+              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
+            />
+          </div>
+
+          <div>
+            <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#374151", marginBottom: 6 }}>Profile Image URL</label>
+            <input
+              type="url"
+              value={image}
+              onChange={e => setImage(e.target.value)}
+              placeholder="https://example.com/avatar.jpg"
+              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
 
@@ -70,7 +82,7 @@ export default function RegisterPage() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="••••••••"
-              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none" }}
+              style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
 
