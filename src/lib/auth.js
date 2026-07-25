@@ -11,12 +11,9 @@ const client = globalForMongo._mongoClient;
 export const auth = betterAuth({
   database: mongodbAdapter(client.db("online_bookverse")),
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_URL,
   trustedOrigins: [
-    process.env.BETTER_AUTH_URL || "http://localhost:3000",
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://localhost:3002",
+    process.env.BETTER_AUTH_URL,
   ],
   emailAndPassword: {
     enabled: true,

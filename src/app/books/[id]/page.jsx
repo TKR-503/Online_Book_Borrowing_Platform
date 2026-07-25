@@ -5,6 +5,7 @@ import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const badgeClass = { Story: "badge-story", Tech: "badge-tech", Science: "badge-science" };
 
@@ -69,7 +70,7 @@ export default function BookDetailPage() {
           {/* Left: Book cover */}
           <div className="book-cover-container" style={{ background: "linear-gradient(135deg,#f0f4ff 0%,#e8eaf6 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: 48, minHeight: 400 }}>
             <div style={{ position: "relative" }}>
-              <img
+              <Image
                 src={coverUrl}
                 alt={book.title}
                 width={200}
