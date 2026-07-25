@@ -68,6 +68,8 @@ export default function Navbar() {
                   <Image
                     src={session.user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user.name || "U")}&background=4f46e5&color=fff&size=80`}
                     alt="avatar"
+                    width={34}
+                    height={34}
                     style={{ width: 34, height: 34, borderRadius: "50%", objectFit: "cover", border: "2px solid #e0e7ff" }}
                     onError={e => { e.target.src = "https://ui-avatars.com/api/?name=U&background=4f46e5&color=fff&size=80"; }}
                   />
@@ -118,7 +120,7 @@ export default function Navbar() {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <Image src={session.user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user.name || "U")}&background=4f46e5&color=fff&size=64`}
-                    alt="avatar" style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />
+                    alt="avatar" width={32} height={32} style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />
                   <span style={{ fontSize: 14, fontWeight: 500, color: "#374151" }}>{session.user.name}</span>
                 </div>
                 <button onClick={logout} style={{ padding: "7px 16px", background: "#4f46e5", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>

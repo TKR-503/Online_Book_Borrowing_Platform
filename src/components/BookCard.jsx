@@ -11,6 +11,7 @@ export default function BookCard({ book, showViewDetails = false }) {
       <div style={{ background: "#f8f9fc", display: "flex", alignItems: "center", justifyContent: "center", height: 180, padding: "16px 12px" }}>
         <Image
           src={book.image_url} alt={book.title}
+          width={110} height={150}
           style={{ height: 150, width: "auto", maxWidth: 110, objectFit: "cover", borderRadius: 6, boxShadow: "0 4px 12px rgba(0,0,0,0.18)" }}
           onError={e => { e.target.src = `https://placehold.co/110x150/4f46e5/fff?text=${encodeURIComponent(book.title.slice(0,6))}`; }}
         />

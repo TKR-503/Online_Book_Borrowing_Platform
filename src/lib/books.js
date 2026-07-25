@@ -70,9 +70,49 @@ export const books = [
     description: "What is the nature of space and time? How do we fit within the universe? How does the universe fit within us? There's no better guide through these mind-expanding questions than acclaimed astrophysicist Neil deGrasse Tyson.",
     available_quantity: 4,
     image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80"
+  },
+  {
+    id: "9",
+    title: "Atomic Habits",
+    author: "James Clear",
+    category: "Story",
+    description: "An easy & proven way to build good habits & break bad ones. Tiny Changes, Remarkable Results.",
+    available_quantity: 9,
+    image_url: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400&q=80"
+  },
+  {
+    id: "10",
+    title: "Refactoring: Improving the Design of Existing Code",
+    author: "Martin Fowler",
+    category: "Tech",
+    description: "Refactoring is about improving the design of existing code. It is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure.",
+    available_quantity: 4,
+    image_url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80"
+  },
+  {
+    id: "11",
+    title: "The Selfish Gene",
+    author: "Richard Dawkins",
+    category: "Science",
+    description: "Professor Dawkins articulates a gene's eye view of evolution. A view which places the gene at the center of natural selection, explaining how evolutionary self-interest governs animal behavior.",
+    available_quantity: 6,
+    image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80"
+  },
+  {
+    id: "12",
+    title: "1984",
+    author: "George Orwell",
+    category: "Story",
+    description: "Winston Smith rewrites history for the Ministry of Truth, but secretly rebels against Big Brother in a dystopian totalitarian society.",
+    available_quantity: 5,
+    image_url: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&q=80"
   }
 ];
 
 export const getBookById = (id) => {
   return books.find((b) => String(b.id) === String(id)) || null;
+};
+
+export const getFeaturedBooks = () => {
+  return books.slice(0, 4);
 };
