@@ -48,7 +48,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Right: styled image with glowing backdrop shadow */}
+        
           <div className="hero-img-container">
             <div className="hero-img-backdrop-shadow" />
             <div className="hero-img-card">
