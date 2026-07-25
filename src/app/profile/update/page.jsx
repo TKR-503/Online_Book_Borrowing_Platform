@@ -4,6 +4,7 @@ import { useSession, authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function UpdateProfilePage() {
   const { data: session, isPending } = useSession();
@@ -72,7 +73,7 @@ export default function UpdateProfilePage() {
 
           {/* Header */}
           <div style={{ background: "linear-gradient(135deg,#3730a3,#4f46e5,#7c3aed)", padding: "28px 32px", display: "flex", alignItems: "center", gap: 16 }}>
-            <img
+            <Image
               width={56}
               height={56}
               src={avatarUrl}

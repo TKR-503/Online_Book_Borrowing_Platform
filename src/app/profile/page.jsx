@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signOut } from "@/lib/auth-client";
+import { useSession, authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
@@ -35,7 +35,7 @@ export default function ProfilePage() {
 
   const handleLogout = async () => {
     try {
-      await signOut({
+      await authClient.signOut({
         fetchOptions: {
           onSuccess: () => {
             toast.success("Logged out successfully!");

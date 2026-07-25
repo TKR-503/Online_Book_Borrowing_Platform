@@ -4,6 +4,7 @@ import { useSession, signOut } from "@/lib/auth-client";
 import { useRouter, usePathname } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -101,7 +102,7 @@ export default function Navbar() {
                     onMouseOver={e => { if (!dropdownOpen) e.currentTarget.style.background = "#f8fafc"; }}
                     onMouseOut={e => { if (!dropdownOpen) e.currentTarget.style.background = "transparent"; }}
                   >
-                    <img
+                    <Image
                       src={avatarUrl}
                       alt="avatar"
                       width={34}
@@ -125,7 +126,7 @@ export default function Navbar() {
                       boxShadow: "0 12px 32px rgba(0,0,0,0.12)", padding: 14, zIndex: 100,
                     }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10, paddingBottom: 12, borderBottom: "1px solid #f1f5f9", marginBottom: 8 }}>
-                        <img src={avatarUrl} alt="avatar" width={38} height={38} style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" }} />
+                        <Image src={avatarUrl} alt="avatar" width={38} height={38} style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" }} />
                         <div style={{ overflow: "hidden" }}>
                           <div style={{ fontSize: 14, fontWeight: 700, color: "#1e293b", textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>{user.name}</div>
                           <div style={{ fontSize: 11, color: "#64748b", textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>{user.email}</div>
@@ -213,7 +214,7 @@ export default function Navbar() {
             {session?.user ? (
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <img src={avatarUrl} alt="avatar" width={32} height={32} style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />
+                  <Image src={avatarUrl} alt="avatar" width={32} height={32} style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />
                   <span style={{ fontSize: 14, fontWeight: 500, color: "#374151" }}>{user.name}</span>
                 </div>
                 <button onClick={logout} style={{ padding: "7px 16px", background: "#4f46e5", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>

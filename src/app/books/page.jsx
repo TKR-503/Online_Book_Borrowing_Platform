@@ -18,7 +18,6 @@ function BooksContent() {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
- 
   const activeCat = searchParams.get("category") || "All Books";
 
   const handleCategoryClick = (cat) => {
@@ -35,15 +34,18 @@ function BooksContent() {
   );
 
   return (
-    <div style={{ background: "#f0f4ff", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "28px 24px" }}>
+    <div style={{ background: "#f0f4ff", minHeight: "100vh", padding: "28px 0" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
 
         {/* Search bar */}
-        <div style={{ position: "relative", marginBottom: 28 }}>
-          <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+        <div style={{ position: "relative", marginBottom: 24 }}>
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             placeholder="Search books by title..."
             className="inp"
-            style={{ width: "100%", paddingLeft: 16, paddingRight: 52, fontSize: 14, color: "#1e293b", height: 48, borderRadius: 10, border: "1.5px solid #e2e8f0", background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", outline: "none" }}
+            style={{ width: "100%", paddingLeft: 16, paddingRight: 52, fontSize: 14, color: "#1e293b", height: 48, borderRadius: 10, outline: "none" }}
           />
           <button type="button" onClick={() => setSearch(search)} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 34, height: 34, borderRadius: 8, background: "#4f46e5", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="16" height="16" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -52,51 +54,88 @@ function BooksContent() {
           </button>
         </div>
 
-        <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+        {/* Responsive Layout */}
+        <div className="books-layout" style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
 
           {/* Sidebar */}
-          <aside style={{ width: 170, flexShrink: 0, background: "#fff", borderRadius: 12, padding: "16px 12px", border: "1px solid #e8ecf0", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", position: "sticky", top: 80 }}>
+          <aside className="books-sidebar" style={{ width: 180, flexShrink: 0, background: "#fff", borderRadius: 12, padding: "16px 12px", border: "1px solid #e8ecf0", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", position: "sticky", top: 80 }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#374151", marginBottom: 12, padding: "0 4px" }}>Categories</div>
-            {CATS.map(cat => {
-              const active = activeCat === cat;
-              return (
-                <button key={cat} onClick={() => handleCategoryClick(cat)}
-                  style={{
-                    width: "100%", display: "flex", alignItems: "center", gap: 8,
-                    padding: "9px 12px", borderRadius: 8, marginBottom: 4,
-                    background: active ? "#4f46e5" : "transparent",
-                    color: active ? "#fff" : "#64748b",
-                    border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600,
-                    textAlign: "left", transition: "background 0.15s, color 0.15s",
-                  }}>
-                  <span style={{ color: active ? "#fff" : "#4f46e5", display: "flex" }}>{catIcon[cat]}</span>
-                  {cat}
-                </button>
-              );
-            })}
+            <div className="cat-buttons-wrapper">
+              {CATS.map(cat => {
+                const active = activeCat === cat;
+                return (
+                  <button key={cat} onClick={() => handleCategoryClick(cat)}
+                    className={`cat-btn ${active ? "active" : ""}`}
+                    style={{
+                      width: "100%", display: "flex", alignItems: "center", gap: 8,
+                      padding: "9px 12px", borderRadius: 8, marginBottom: 4,
+                      background: active ? "#4f46e5" : "transparent",
+                      color: active ? "#fff" : "#64748b",
+                      border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600,
+                      textAlign: "left", transition: "background 0.15s, color 0.15s", flexShrink: 0,
+                    }}>
+                    <span style={{ color: active ? "#fff" : "#4f46e5", display: "flex" }}>{catIcon[cat]}</span>
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
           </aside>
 
-          {/* Main */}
+          {/* Main Content */}
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ marginBottom: 16 }}>
-              <h1 style={{ fontSize: 18, fontWeight: 800, color: "#1e293b" }}>All Books</h1>
-              <p style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>Showing {filtered.length} books</p>
+              <h1 style={{ fontSize: 20, fontWeight: 800, color: "#1e293b" }}>All Books</h1>
+              <p style={{ fontSize: 13, color: "#94a3b8", marginTop: 2 }}>Showing {filtered.length} books</p>
             </div>
 
             {filtered.length === 0 ? (
               <div style={{ background: "#fff", borderRadius: 12, padding: "60px 20px", textAlign: "center", border: "1px solid #e8ecf0" }}>
                 <div style={{ fontSize: 56, marginBottom: 12 }}>📭</div>
                 <div style={{ fontWeight: 700, color: "#374151", marginBottom: 4 }}>No books found</div>
-                <div style={{ fontSize: 13, color: "#94a3b8" }}>Try a different search or category.</div>
+                <div style={{ fontSize: 13, color: "#94a3b8" }}>Try a different search query or category.</div>
               </div>
             ) : (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 18 }}>
+              <div className="books-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 20 }}>
                 {filtered.map(book => <BookCard key={book.id} book={book} />)}
               </div>
             )}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media(max-width: 768px) {
+          .books-layout {
+            flex-direction: column !important;
+          }
+          .books-sidebar {
+            width: 100% !important;
+            position: relative !important;
+            top: 0 !important;
+            padding: 12px !important;
+            margin-bottom: 20px;
+          }
+          .cat-buttons-wrapper {
+            display: flex !important;
+            gap: 8px !important;
+            overflow-x: auto !important;
+            white-space: nowrap !important;
+            padding-bottom: 4px;
+          }
+          .cat-btn {
+            width: auto !important;
+            margin-bottom: 0 !important;
+            padding: 8px 14px !important;
+          }
+        }
+        @media(max-width: 480px) {
+          .books-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
