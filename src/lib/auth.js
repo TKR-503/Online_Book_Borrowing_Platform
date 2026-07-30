@@ -8,21 +8,33 @@ if (!globalForMongo._mongoClient) {
 }
 const client = globalForMongo._mongoClient;
 
+// Dynamically resolve base URL to support both local development and Vercel production
+const getBaseURL = () => {
+  if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+};
+
 export const auth = betterAuth({
   database: mongodbAdapter(client.db("online_bookverse")),
-  secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL,
+  secret: process.env.BETTER_AUTH_SECRET || "fallback_secret_key_for_development_12345",
+  baseURL: getBaseURL(),
   trustedOrigins: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3000",
+    "https://online-book-borrowing-platform-ten.vercel.app",
     process.env.BETTER_AUTH_URL,
-  ],
+    process.env.NEXT_PUBLIC_APP_URL,
+  ].filter(Boolean),
   emailAndPassword: {
     enabled: true,
-    autoSignIn: true,
+    autoSignIn: false,
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
 });
