@@ -8,25 +8,18 @@ if (!globalForMongo._mongoClient) {
 }
 const client = globalForMongo._mongoClient;
 
-// Dynamically resolve base URL to support local development, custom domains, and Vercel deployments
+// Dynamically resolve base URL matching current environment
 const getBaseURL = () => {
-  if (process.env.NODE_ENV === "development") {
-    return "http://localhost:3000";
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`.replace(/\/$/, "");
   }
-  let url = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
-  if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    url = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`.replace(/\/$/, "");
   }
-  if (!url && process.env.VERCEL_URL) {
-    url = `https://${process.env.VERCEL_URL}`;
+  if (process.env.BETTER_AUTH_URL) {
+    return process.env.BETTER_AUTH_URL.replace(/\/$/, "");
   }
-  if (!url) {
-    url = "http://localhost:3000";
-  }
-  if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    url = `https://${url}`;
-  }
-  return url.replace(/\/$/, "");
+  return "http://localhost:3000";
 };
 
 export const auth = betterAuth({
