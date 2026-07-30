@@ -4,7 +4,7 @@ import { getBookById } from "@/lib/books";
 import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 const badgeClass = { Story: "badge-story", Tech: "badge-tech", Science: "badge-science" };
@@ -18,13 +18,6 @@ export default function BookDetailPage() {
     const [imgError, setImgError] = useState(false);
     const book = getBookById(id);
 
-    // Redirect unauthenticated users via useEffect
-    useEffect(() => {
-        if (!isPending && !session?.user) {
-            router.push("/login");
-        }
-    }, [isPending, session?.user, router]);
-
     if (isPending) return (
         <div style={{ minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 36, height: 36, border: "4px solid #e0e7ff", borderTopColor: "#4f46e5", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
@@ -32,7 +25,7 @@ export default function BookDetailPage() {
         </div>
     );
 
-    // Fallback demo session check
+    // Active authenticated user or fallback demo session
     const currentUser = session?.user || { name: "Demo Reader" };
 
     if (!book) return (
@@ -69,7 +62,7 @@ export default function BookDetailPage() {
 
                     {/* Left: Book cover */}
                     <div className="book-cover-container" style={{ background: "linear-gradient(135deg,#f0f4ff 0%,#e8eaf6 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: 48, minHeight: 400 }}>
-                        <div style={{ position: "relative" }}>s
+                        <div style={{ position: "relative" }}>
                             <Image
                                 src={coverUrl}
                                 alt={book.title}

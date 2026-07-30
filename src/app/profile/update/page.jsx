@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession, authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -10,18 +10,26 @@ export default function UpdateProfilePage() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
 
-  // Fallback profile if session is pending or demo mode
+  // Active authenticated user from session or fallback
   const user = session?.user || {
     name: "Demo Reader",
     email: "reader@bookverse.com",
     image: "",
   };
 
-  const [name, setName] = useState(user.name || "");
-  const [image, setImage] = useState(user.image || "");
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [imgError, setImgError] = useState(false);
+
+  // Sync state when Google session user loads
+  useEffect(() => {
+    if (session?.user) {
+      setName(session.user.name || "");
+      setImage(session.user.image || "");
+    }
+  }, [session?.user]);
 
   if (isPending) {
     return (
