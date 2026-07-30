@@ -40,6 +40,13 @@ export const auth = betterAuth({
     process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "",
     process.env.NEXT_PUBLIC_APP_URL ? process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "") : "",
   ].filter(Boolean),
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    },
+  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,

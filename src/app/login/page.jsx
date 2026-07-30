@@ -35,20 +35,15 @@ export default function LoginPage() {
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/profile",
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Signed in with Google!");
-          router.push("/profile");
-        },
-        onError: (ctx) => {
-          toast.error(ctx.error.message || "Failed to sign in with Google");
-          setGoogleLoading(false);
-        },
-      },
-    });
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/profile",
+      });
+    } catch {
+      toast.error("Failed to sign in with Google");
+      setGoogleLoading(false);
+    }
   };
 
   return (
