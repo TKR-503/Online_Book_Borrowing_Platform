@@ -2,7 +2,7 @@
 import { useSession, authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
@@ -10,12 +10,6 @@ export default function ProfilePage() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const [imgError, setImgError] = useState(false);
-
-  useEffect(() => {
-    if (!isPending && !session?.user) {
-      router.push("/login");
-    }
-  }, [isPending, session?.user, router]);
 
   if (isPending) {
     return (
@@ -26,7 +20,7 @@ export default function ProfilePage() {
     );
   }
 
-  // Active authenticated user or fallback demo profile
+  // Active authenticated user from session or fallback demo user
   const user = session?.user || {
     name: "Demo Reader",
     email: "reader@bookverse.com",
