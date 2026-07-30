@@ -60,7 +60,7 @@ export default function RegisterPage() {
               required
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="John Doe"
+              placeholder="Enter your full name"
               style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
@@ -72,7 +72,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="Enter your email address"
               style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
@@ -83,7 +83,7 @@ export default function RegisterPage() {
               type="url"
               value={image}
               onChange={e => setImage(e.target.value)}
-              placeholder="https://example.com/avatar.jpg"
+              placeholder="Enter a URL for your profile image (optional)"
               style={{ width: "100%", height: 44, padding: "0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
             />
           </div>
@@ -96,7 +96,7 @@ export default function RegisterPage() {
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 style={{ width: "100%", height: 44, padding: "0 42px 0 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, background: "#f8faff", outline: "none", color: "#1e293b" }}
               />
               <button

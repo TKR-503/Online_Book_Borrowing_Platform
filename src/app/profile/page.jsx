@@ -14,7 +14,7 @@ export default function ProfilePage() {
   if (isPending) {
     return (
       <div style={{ minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f0f4ff" }}>
-        <div style={{ width: 36, height: 36, border: "4px solid #e0e7ff", borderTopColor: "#4f46e5", borderRadius: "50%", animation: "spin 0.8s linear infinite" }}/>
+        <div style={{ width: 36, height: 36, border: "4px solid #e0e7ff", borderTopColor: "#4f46e5", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
         <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
       </div>
     );
@@ -71,7 +71,7 @@ export default function ProfilePage() {
                   onError={() => setImgError(true)}
                   style={{ width: 100, height: 100, borderRadius: "50%", objectFit: "cover", border: "3px solid #e0e7ff", boxShadow: "0 4px 16px rgba(79,70,229,0.15)" }}
                 />
-                <span style={{ position: "absolute", bottom: 4, right: 4, width: 14, height: 14, borderRadius: "50%", background: "#22c55e", border: "2px solid #fff" }}/>
+                <span style={{ position: "absolute", bottom: 4, right: 4, width: 14, height: 14, borderRadius: "50%", background: "#22c55e", border: "2px solid #fff" }} />
               </div>
               <div style={{ fontWeight: 800, fontSize: 18, color: "#1e293b", textAlign: "center" }}>{user.name}</div>
               <div style={{ fontSize: 13, color: "#64748b", textAlign: "center", marginTop: 2 }}>{user.email}</div>
