@@ -36,9 +36,10 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
     try {
+      const redirectUrl = typeof window !== "undefined" ? `${window.location.origin}/profile` : "/profile";
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/profile",
+        callbackURL: redirectUrl,
       });
     } catch {
       toast.error("Failed to sign in with Google");

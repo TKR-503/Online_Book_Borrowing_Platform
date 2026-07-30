@@ -10,6 +10,9 @@ const client = globalForMongo._mongoClient;
 
 // Dynamically resolve base URL to support local development, custom domains, and Vercel deployments
 const getBaseURL = () => {
+  if (process.env.NODE_ENV === "development") {
+    return "http://localhost:3000";
+  }
   let url = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
   if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     url = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
