@@ -8,16 +8,18 @@ if (!globalForMongo._mongoClient) {
 }
 const client = globalForMongo._mongoClient;
 
-// Dynamically resolve base URL to support local development and Vercel production
+// Dynamically resolve base URL to support local development, custom domains, and Vercel deployments
 const getBaseURL = () => {
   let url = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
+  if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    url = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
   if (!url && process.env.VERCEL_URL) {
     url = `https://${process.env.VERCEL_URL}`;
   }
   if (!url) {
     url = "http://localhost:3000";
   }
-  // Ensure protocol prefix and strip trailing slash
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     url = `https://${url}`;
   }
@@ -35,11 +37,18 @@ export const auth = betterAuth({
     "https://online-book-borrowing-platform-ten.vercel.app",
     process.env.BETTER_AUTH_URL ? process.env.BETTER_AUTH_URL.replace(/\/$/, "") : "",
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "",
     process.env.NEXT_PUBLIC_APP_URL ? process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "") : "",
   ].filter(Boolean),
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
+  },
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
   },
   socialProviders: {
     google: {

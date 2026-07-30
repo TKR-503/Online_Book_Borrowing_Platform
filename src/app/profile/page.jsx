@@ -2,7 +2,7 @@
 import { useSession, authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
@@ -10,6 +10,12 @@ export default function ProfilePage() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    if (!isPending && !session?.user) {
+      router.push("/login");
+    }
+  }, [isPending, session?.user, router]);
 
   if (isPending) {
     return (
@@ -20,7 +26,7 @@ export default function ProfilePage() {
     );
   }
 
-  // Fallback profile if session is pending or demo mode
+  // Active authenticated user or fallback demo profile
   const user = session?.user || {
     name: "Demo Reader",
     email: "reader@bookverse.com",
@@ -62,7 +68,6 @@ export default function ProfilePage() {
             {/* Left avatar column */}
             <div style={{ paddingRight: 28, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 160 }}>
               <div style={{ position: "relative", marginBottom: 14 }}>
-                {/* Standard img tag for avatar to handle onError cleanly without React DOM warnings */}
                 <Image
                   width={100}
                   height={100}
