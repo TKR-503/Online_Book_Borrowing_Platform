@@ -8,11 +8,20 @@ if (!globalForMongo._mongoClient) {
 }
 const client = globalForMongo._mongoClient;
 
-// Dynamically resolve base URL to support both local development and Vercel production
+// Dynamically resolve base URL to support local development and Vercel production
 const getBaseURL = () => {
-  if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  let url = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
+  if (!url && process.env.VERCEL_URL) {
+    url = `https://${process.env.VERCEL_URL}`;
+  }
+  if (!url) {
+    url = "http://localhost:3000";
+  }
+  // Ensure protocol prefix and strip trailing slash
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = `https://${url}`;
+  }
+  return url.replace(/\/$/, "");
 };
 
 export const auth = betterAuth({
@@ -24,8 +33,9 @@ export const auth = betterAuth({
     "http://localhost:3001",
     "http://127.0.0.1:3000",
     "https://online-book-borrowing-platform-ten.vercel.app",
-    process.env.BETTER_AUTH_URL,
-    process.env.NEXT_PUBLIC_APP_URL,
+    process.env.BETTER_AUTH_URL ? process.env.BETTER_AUTH_URL.replace(/\/$/, "") : "",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+    process.env.NEXT_PUBLIC_APP_URL ? process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "") : "",
   ].filter(Boolean),
   emailAndPassword: {
     enabled: true,
